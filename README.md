@@ -10,7 +10,7 @@ It does **not** train a model or provide trading advice.
 - Frequency: daily OHLCV bars
 - Future prediction horizon: 10 trading days (not implemented in Phase 1)
 - Interface: Python command line first
-- Current status: repository scaffold; no market data has been downloaded
+- Current status: validated data contracts; no market data has been downloaded
 
 ## Research principles
 
@@ -31,12 +31,21 @@ It does **not** train a model or provide trading advice.
 ```text
 src/swing_trading_research/  Python package and CLI
 tests/                       Automated tests
+docs/                        Data-contract and decision documentation
 .env.example                 Credential names only; never real values
 pyproject.toml               Project and tool configuration
 ```
 
 The ignored `data/`, `artifacts/`, `models/`, and `reports/generated/`
 directories will hold local or reproducible outputs later.
+
+## Data contracts
+
+The initial schemas validate Trading 212 instrument metadata, explicit GBP/GBX
+quote conventions, raw-versus-adjusted daily OHLCV fields, auditable symbol
+mappings, and secret-safe provenance. See
+[`docs/data-contracts.md`](docs/data-contracts.md) for field semantics and
+validation rules.
 
 ## Local setup (PowerShell)
 
