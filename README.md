@@ -10,7 +10,8 @@ It does **not** train a model or provide trading advice.
 - Frequency: daily OHLCV bars
 - Future prediction horizon: 10 trading days (not implemented in Phase 1)
 - Interface: Python command line first
-- Current status: validated data contracts; no market data has been downloaded
+- Current status: validated data contracts and an offline-tested, read-only
+  Trading 212 instrument client; no market data has been downloaded
 
 ## Research principles
 
@@ -46,6 +47,13 @@ quote conventions, raw-versus-adjusted daily OHLCV fields, auditable symbol
 mappings, and secret-safe provenance. See
 [`docs/data-contracts.md`](docs/data-contracts.md) for field semantics and
 validation rules.
+
+## Trading 212 client
+
+The client currently supports only `GET /equity/metadata/instruments`. It has
+no order methods and cannot buy or sell anything. Its tests use synthetic US
+and UK instrument responses through a fake connection, so running the test
+suite never contacts Trading 212 and never requires real credentials.
 
 ## Local setup (PowerShell)
 
