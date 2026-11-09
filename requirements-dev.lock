@@ -1,0 +1,9 @@
+# Exact development environment tested on Python 3.13.5 and Windows.
+# Regenerate deliberately when upgrading tools; do not edit casually.
+colorama==0.4.6
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+Pygments==2.21.0
+pytest==9.2.0
+ruff==0.17.4
