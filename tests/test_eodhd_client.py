@@ -46,13 +46,9 @@ def _client(payload: object) -> tuple[EodhdClient, FakeTransport]:
 
 
 def test_fetch_daily_history_preserves_bytes_and_validates_bars() -> None:
-    client, transport = _client(
-        [_bar(date="2026-11-06"), _bar(date="2026-11-09")]
-    )
+    client, transport = _client([_bar(date="2026-11-06"), _bar(date="2026-11-09")])
 
-    result = client.get_daily_history(
-        "aapl.us", date(2026, 11, 6), date(2026, 11, 9)
-    )
+    result = client.get_daily_history("aapl.us", date(2026, 11, 6), date(2026, 11, 9))
 
     assert result.symbol == "AAPL.US"
     assert len(result.bars) == 2
@@ -81,9 +77,7 @@ def test_fetch_daily_history_preserves_bytes_and_validates_bars() -> None:
 def test_uk_symbol_is_not_automatically_converted_to_gbp() -> None:
     client, transport = _client([_bar()])
 
-    result = client.get_daily_history(
-        "BP.LSE", date(2026, 11, 9), date(2026, 11, 9)
-    )
+    result = client.get_daily_history("BP.LSE", date(2026, 11, 9), date(2026, 11, 9))
 
     assert result.symbol == "BP.LSE"
     assert result.bars[0].close_raw == Decimal("101.2")
@@ -142,8 +136,6 @@ def test_out_of_range_dates_are_rejected() -> None:
 
 def test_empty_weekend_response_is_valid() -> None:
     client, _ = _client([])
-    result = client.get_daily_history(
-        "AAPL.US", date(2026, 11, 7), date(2026, 11, 8)
-    )
+    result = client.get_daily_history("AAPL.US", date(2026, 11, 7), date(2026, 11, 8))
     assert result.bars == ()
     assert result.raw_response == b"[]"
