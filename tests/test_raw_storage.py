@@ -54,9 +54,10 @@ def test_saves_original_bytes_with_secret_free_provenance(tmp_path, symbol) -> N
     assert capture.raw_path.parent == capture.provenance_path.parent
     assert symbol in capture.raw_path.parts
     assert store.read_verified(capture) == history.raw_response
-    assert capture.provenance.raw_sha256 == hashlib.sha256(
-        history.raw_response
-    ).hexdigest()
+    assert (
+        capture.provenance.raw_sha256
+        == hashlib.sha256(history.raw_response).hexdigest()
+    )
 
     manifest_text = capture.provenance_path.read_text(encoding="utf-8")
     manifest = json.loads(manifest_text)
