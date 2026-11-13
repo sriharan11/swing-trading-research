@@ -121,9 +121,7 @@ class RawEodhdStore:
         """Only return original bytes when the recorded digest still matches."""
         raw_bytes = capture.raw_path.read_bytes()
         try:
-            manifest = json.loads(
-                capture.provenance_path.read_text(encoding="utf-8")
-            )
+            manifest = json.loads(capture.provenance_path.read_text(encoding="utf-8"))
             recorded_digest = manifest["raw_sha256"]
         except (OSError, ValueError, KeyError, TypeError) as error:
             raise RawDataIntegrityError("Invalid raw-data provenance file") from error
